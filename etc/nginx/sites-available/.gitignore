@@ -1,0 +1,11 @@
+# Ignore everything in sites-available directory
+/*
+
+# Except
+!.gitignore
+!default
+!multisite-subdirectory.com
+!multisite-subdomain.com
+!single-site-no-ssl.com
+!single-site.com
+!single-site-with-caching.com

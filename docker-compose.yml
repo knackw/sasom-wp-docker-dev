@@ -1,0 +1,80 @@
+version: "3.1"
+services:
+    sasom_rocket_php:
+      container_name: sasom_rocket_wordpress
+      build:  .
+      depends_on:
+        - "sasom_rocket_db"
+      environment:
+        - WORDPRESS_DB_USER=wp
+        - WORDPRESS_DB_PASSWORD=wordpress
+        - WORDPRESS_DB_HOST=sasom_rocket_db
+        - WORDPRESS_DB_NAME=wordpress
+        - WORDPRESS_DOMAIN=localhost
+        - WORDPRESS_ADMIN_USER=admin
+        - WORDPRESS_ADMIN_PASSWORD=test
+        - WORDPRESS_ADMIN_EMAIL=info@sasmo.de
+      volumes:
+        - type: bind
+          source: ./data/wp-volume
+          target: /www
+          consistency: cached
+        - type: bind
+          source: ./etc/certs
+          target: /certs
+          consistency: cached
+      ports:
+        - 80:80
+        - 443:443
+      networks:
+        - sasom-rocket-network
+
+    sasom_rocket_db:
+      container_name: sasom_rocket_db
+      image: mariadb:10.6.0
+      command: --default-authentication-plugin=mysql_native_password
+      restart: always
+      environment:
+        MYSQL_USER: wp
+        MYSQL_PASSWORD: wordpress
+        MYSQL_ROOT_PASSWORD: mysqlrootpw
+        MYSQL_DATABASE: wordpress
+      ports: [ '6033:3306' ]
+      expose: [ '3306' ]
+      volumes:
+        - type: bind
+          source: ./data/db-volume
+          target: /var/lib/mysql
+          consistency: cached
+      networks:
+        - sasom-rocket-network
+
+    sasom_rocket_phpmyadmin:
+      container_name: sasom_rocket_phpmyadmin
+      image: phpmyadmin/phpmyadmin:4.7
+      restart: always
+      ports: [ '8081:80' ]
+      links: [ 'sasom_rocket_db:sasom_rocket_db' ]
+      environment:
+        - PMA_HOST=sasom_rocket_db
+        - PMA_USER=wp
+        - PMA_PASSWORD=wordpress
+        - PMA_ARBITRARY=1
+      networks:
+        - sasom-rocket-network
+
+    sasom_rocket_mailhog:
+      container_name: sasom_rocket_mail
+      image: mailhog/mailhog
+      ports:
+        - "8025:8025"
+        - "1025:1025"
+      networks:
+        - sasom-rocket-network
+
+volumes:
+  data:
+
+networks:
+  sasom-rocket-network:
+    driver: bridge
