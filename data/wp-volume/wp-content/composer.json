@@ -1,0 +1,83 @@
+{
+  "name": "sasom/wpforall",
+  "description": "WpForAll Site",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org",
+      "only": [
+        "wpackagist-plugin/*",
+        "wpackagist-theme/*"
+      ]
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/knackw/updraftplus"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/knackw/dsgvo-all-in-one-for-wp-pro"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/knackw/monarch"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/knackw/seo-by-rank-math-pro"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/knackw/divi"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/knackw/woocommerce-german-market"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/knackw/wp-and-divi-icons-pro"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/knackw/wp-rocket"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/knackw/formidable-pro"
+    }
+  ],
+  "require": {
+    "knackw/divi": "dev-main",
+    "knackw/dsgvo-all-in-one-for-wp-pro": "dev-main",
+    "knackw/formidable-pro": "dev-main",
+    "knackw/monarch": "dev-main",
+    "knackw/seo-by-rank-math-pro": "dev-main",
+    "knackw/updraftplus": "dev-main",
+    "knackw/woocommerce-german-market": "dev-main",
+    "knackw/wp-and-divi-icons-pro": "dev-main",
+    "knackw/wp-rocket": "dev-main",
+    "wpackagist-plugin/nginx-helper": "*",
+    "wpackagist-plugin/matomo": "*",
+    "wpackagist-plugin/mailpoet": "*",
+    "wpackagist-plugin/formidable": "*",
+    "wpackagist-plugin/woocommerce": "*",
+    "wpackagist-plugin/webp-express": "*",
+    "wpackagist-plugin/seo-by-rank-math": "*",
+    "wpackagist-plugin/duplicate-page": "*",
+    "wpackagist-plugin/clearfy": "*",
+    "wpackagist-plugin/credit-tracker": "*",
+    "wpackagist-plugin/ewww-image-optimizer": "*",
+    "wpackagist-theme/twentynineteen": "*"
+  },
+  "extra": {
+    "installer-paths": {
+      "themes/{$name}/": [
+        "type:wordpress-theme"
+      ],
+      "plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ]
+    }
+  }
+}
