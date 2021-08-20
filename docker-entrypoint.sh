@@ -86,6 +86,4 @@ define( 'RT_WP_NGINX_HELPER_CACHE_PATH', '/var/run/NGINX-cache' );" \
 
 fi
 
-redis-server
-
 exec "$@"

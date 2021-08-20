@@ -1,14 +1,14 @@
 version: "3.1"
 services:
-    sasom_rocket_php:
-      container_name: sasom_rocket_wordpress
+    sasom_php:
+      container_name: sasom_wordpress
       build:  .
       depends_on:
-        - "sasom_rocket_db"
+        - "sasom_db"
       environment:
         - WORDPRESS_DB_USER=wp
         - WORDPRESS_DB_PASSWORD=wordpress
-        - WORDPRESS_DB_HOST=sasom_rocket_db
+        - WORDPRESS_DB_HOST=sasom_db
         - WORDPRESS_DB_NAME=wordpress
         - WORDPRESS_DOMAIN=localhost
         - WORDPRESS_ADMIN_USER=admin
@@ -19,18 +19,17 @@ services:
           source: ./data/wp-volume
           target: /www
           consistency: cached
-        - type: bind
-          source: ./etc/certs
-          target: /certs
-          consistency: cached
+        #- type: bind
+        #  source: ./etc/certs
+        #  target: /certs
+        #  consistency: cached
       ports:
         - 80:80
-        - 443:443
       networks:
-        - sasom-rocket-network
+        - sasom-network
 
-    sasom_rocket_db:
-      container_name: sasom_rocket_db
+    sasom_db:
+      container_name: sasom_db
       image: mariadb:10.6.0
       command: --default-authentication-plugin=mysql_native_password
       restart: always
@@ -47,34 +46,34 @@ services:
           target: /var/lib/mysql
           consistency: cached
       networks:
-        - sasom-rocket-network
+        - sasom-network
 
-    sasom_rocket_phpmyadmin:
-      container_name: sasom_rocket_phpmyadmin
+    sasom_phpmyadmin:
+      container_name: sasom_phpmyadmin
       image: phpmyadmin/phpmyadmin:4.7
       restart: always
       ports: [ '8081:80' ]
-      links: [ 'sasom_rocket_db:sasom_rocket_db' ]
+      links: [ 'sasom_db:sasom_db' ]
       environment:
-        - PMA_HOST=sasom_rocket_db
+        - PMA_HOST=sasom_db
         - PMA_USER=wp
         - PMA_PASSWORD=wordpress
         - PMA_ARBITRARY=1
       networks:
-        - sasom-rocket-network
+        - sasom-network
 
-    sasom_rocket_mailhog:
-      container_name: sasom_rocket_mail
+    sasom_mail:
+      container_name: sasom_mail
       image: mailhog/mailhog
       ports:
         - "8025:8025"
         - "1025:1025"
       networks:
-        - sasom-rocket-network
+        - sasom-network
 
 volumes:
   data:
 
 networks:
-  sasom-rocket-network:
+  sasom-network:
     driver: bridge

@@ -57,11 +57,6 @@ Complete installation instructions can be found at: https://konsumschaf.de/post/
 
 ### 2. Installation PHP Development Environment
 
-First register to gitlab:
-```
-docker login registry.go-suite.rocks 
-```
-
 With the terminal command given below the applications are generated
 and then started the service. You must be in the directory of the project root
 where the docker-compose.yml file is located.
@@ -325,6 +320,16 @@ For additional Information look at: https://docs.gitlab.com/ee/topics/git/
 
 Generate SSH key: https://gitlab.go-suite.rocks/help/ssh/README#generate-an-ssh-key-pair
 
-## 6. Conclusion
+## 6. Redis (https://redis.io/)
+
+Start Server
+```  
+redis-server
+redis-cli ping
+```  
+
+Useful Link: https://supporthost.in/install-redis-on-a-plesk-server/
+
+## 7. Conclusion
 
 Happy coding :-)

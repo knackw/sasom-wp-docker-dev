@@ -112,6 +112,7 @@ RUN printf "\n" | pecl install pcov
 
 # setup redis
 RUN apk --update add redis
+RUN echo "vm.overcommit_memory = 1" >> /etc/sysctl.conf
 
 # set recommended PHP.ini settings
 # see https://secure.php.net/manual/en/opcache.installation.php
