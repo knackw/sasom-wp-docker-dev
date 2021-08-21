@@ -48,6 +48,26 @@ services:
       networks:
         - sasom-network
 
+    sasom_redis:
+      container_name: sasom_redis
+      image: "redis:alpine"
+      command: redis-server --requirepass redispass
+      ports:
+        - "6379:6379"
+      volumes:
+        - type: bind
+          source: ./data/redis-volume
+          target: /var/lib/redis
+          consistency: cached
+        - type: bind
+          source: ./etc/redis.conf
+          target: /usr/local/etc/redis/redis.conf
+          consistency: cached
+      environment:
+        - REDIS_REPLICATION_MODE=master
+      networks:
+        - sasom-network
+
     sasom_phpmyadmin:
       container_name: sasom_phpmyadmin
       image: phpmyadmin/phpmyadmin:4.7

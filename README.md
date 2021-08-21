@@ -327,6 +327,10 @@ Start Server
 redis-server
 redis-cli ping
 ```  
+Shows the IP Addresses of the running containers
+```
+docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'
+```  
 
 Useful Link: https://supporthost.in/install-redis-on-a-plesk-server/
 
