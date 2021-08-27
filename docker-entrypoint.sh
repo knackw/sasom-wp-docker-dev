@@ -5,7 +5,7 @@
 ln -s /usr/bin/php7 /usr/bin/php
 php -v
 
-openssl req -x509 -nodes -days 365 -subj "/C=CA/ST=QC/O=SMG, Inc./CN=example.com" -addext "subjectAltName=DNS:example.com" -newkey rsa:2048 -keyout /certs/example.com.key -out /certs/example.com.crt;
+openssl req -x509 -nodes -days 365 -subj "/C=CA/ST=QC/O=SMG, Inc./CN=example.com" -addext "subjectAltName=DNS:example.com" -newkey rsa:2048 -keyout /certs/localhost.key -out /certs/localhost.crt;
 
 export WAIT_HOSTS=wpforall_db:3306
 export WAIT_HOSTS_TIMEOUT=30
@@ -30,8 +30,8 @@ if [ ! -f "wp-config.php" ]; then
 define('WP_CACHE_KEY_SALT', 'localhost');
 define( 'WP_DEBUG', true );
 define( 'WP_DEBUG_LOG', true );
-define( 'WP_HOME', 'http://localhost' );
-define( 'WP_SITEURL', 'http://localhost' );
+define( 'WP_HOME', 'https://localhost' );
+define( 'WP_SITEURL', 'https://localhost' );
 define( 'WP_MEMORY_LIMIT', '1024M' );
 define( 'DISABLE_WP_CRON', true);
 define( 'WP_CACHE', true);
@@ -45,7 +45,7 @@ define( 'WP_REDIS_READ_TIMEOUT', 1 );" \
 
     echo "Core Install"
     wp-cli core install \
-        --url=http://${WORDPRESS_DOMAIN} \
+        --url=https://${WORDPRESS_DOMAIN} \
         --title=${WORDPRESS_DOMAIN} \
         --admin_name=${WORDPRESS_ADMIN_USER:-admin} \
         --admin_password=${WORDPRESS_ADMIN_PASSWORD:-test} \
