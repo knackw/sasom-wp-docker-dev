@@ -19,12 +19,13 @@ services:
           source: ./data/wp-volume
           target: /www
           consistency: cached
-        #- type: bind
-        #  source: ./etc/certs
-        #  target: /certs
-        #  consistency: cached
+        - type: bind
+          source: ./etc/certs
+          target: /certs
+          consistency: cached
       ports:
         - 80:80
+        - 443:443
       networks:
         - sasom-network
 
@@ -55,10 +56,6 @@ services:
       ports:
         - "6379:6379"
       volumes:
-        - type: bind
-          source: ./data/redis-volume
-          target: /var/lib/redis
-          consistency: cached
         - type: bind
           source: ./etc/redis.conf
           target: /usr/local/etc/redis/redis.conf
