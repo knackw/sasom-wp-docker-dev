@@ -24,8 +24,8 @@ services:
           target: /certs
           consistency: cached
       ports:
-        - 80:80
-        - 443:443
+        - ${WORDPRESS_PORT}:80
+        - ${WORDPRESS_PORT_SSL}:443
       networks:
         - network
 
@@ -39,8 +39,10 @@ services:
         MYSQL_DATABASE: ${MYSQL_DATABASE}
         MYSQL_USER: ${MYSQL_USER}
         MYSQL_PASSWORD: ${MYSQL_PASSWORD}
-      ports: [ '6033:3306' ]
-      expose: [ '3306' ]
+      ports:
+        - ${MYSQL_PORT}:3306
+      expose:
+        - 3306
       volumes:
         - type: bind
           source: ./data/db-volume
@@ -54,7 +56,7 @@ services:
       image: "redis:alpine"
       command: redis-server --requirepass redispass
       ports:
-        - "6379:6379"
+        - ${REDIS_PORT}:6379
       volumes:
         - type: bind
           source: ./etc/redis.conf
@@ -69,8 +71,10 @@ services:
       container_name: ${CONTAINER_PREFIX}-phpmyadmin
       image: phpmyadmin/phpmyadmin:4.7
       restart: always
-      ports: [ '8081:80' ]
-      links: [ 'db:db' ]
+      ports:
+        - ${PMA_PORT}:80
+      links:
+        - db:db
       environment:
         PMA_HOST: db
         PMA_USER: ${WORDPRESS_DB_USER}
@@ -83,8 +87,8 @@ services:
       container_name: ${CONTAINER_PREFIX}-mail
       image: mailhog/mailhog
       ports:
-        - "8025:8025"
-        - "1025:1025"
+        - ${MAILHOG_PORT_WEB_UI}:8025 # web ui
+        - ${MAILHOG_PORT_SMTP}:1025 # smtp server
       networks:
         - network
 
