@@ -57,31 +57,34 @@ define( 'WP_REDIS_READ_TIMEOUT', 1 );" \
     # Plugin Installation
     wp-cli ${ARGS} plugin install https://downloads.wordpress.org/plugin/nginx-helper.2.2.2.zip
     wp-cli ${ARGS} plugin activate nginx-helper
-    #wp-cli ${ARGS} plugin install https://git-updater.com/wp-content/uploads/2021/07/git-updater-10.4.2.zip
-    #wp-cli ${ARGS} plugin activate git-updater
+    wp-cli ${ARGS} plugin install https://downloads.wordpress.org/plugin/wp-redis.1.1.4.zip
+    wp-cli ${ARGS} plugin activate wp-redis
+    wp-cli ${ARGS} plugin install https://downloads.wordpress.org/plugin/query-monitor.3.7.1.zip
+    wp-cli ${ARGS} plugin activate query-monitor
+    wp-cli ${ARGS} plugin install https://downloads.wordpress.org/plugin/flush-opcache.4.1.2.zip
+    wp-cli ${ARGS} plugin activate flush-opcache
+    wp-cli ${ARGS} plugin install https://downloads.wordpress.org/plugin/updraftplus.1.16.65.zip
+    wp-cli ${ARGS} plugin activate updraftplus
     #wp-cli ${ARGS} plugin install https://github.com/elegantthemes/divi-extension-example/archive/refs/heads/master.zip
     #wp-cli ${ARGS} plugin activate divi-extension-example
-    #wp-cli ${ARGS} plugin install https://github.com/nhutdm/wp-sync-db/archive/refs/heads/master.zip
-    #wp-cli ${ARGS} plugin activate wp-sync-db
 
-    # Theme Installation
+    # Theme Installation local example
     #mv /tmp/divi/ wp-content/themes/divi/
-
     #wp-cli ${ARGS} theme activate divi
 
-    # Plugin DINSTALLATION
+    # Remove Plugin's
     wp-cli ${ARGS} plugin uninstall akismet
     wp-cli ${ARGS} plugin uninstall hello
 
-    # Theme DINSTALLATION
+    # Remove Theme's
     wp-cli ${ARGS} theme activate twentynineteen
     wp-cli ${ARGS} theme uninstall twentytwenty
     wp-cli ${ARGS} theme uninstall twentytwentyone
 
-    #Set Options
+    # Set Options Example
     #p-cli ${ARGS} option update et_divi '{ "et_automatic_updates_options": { "username": "", "api_key": "" } }' --format=json
 
-    #Set Rewriteurl
+    #Set Rewrite url
     wp-cli ${ARGS} rewrite structure '/%postname%/'
 
     chown -R www:www *
