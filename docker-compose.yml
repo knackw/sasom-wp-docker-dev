@@ -1,19 +1,19 @@
 version: "3.1"
 services:
-    sasom_php:
-      container_name: sasom_wordpress
+    wordpress:
+      container_name: ${CONTAINER_PREFIX}-wordpress
       build:  .
       depends_on:
-        - "sasom_db"
+        - "db"
       environment:
-        - WORDPRESS_DB_USER=wp
-        - WORDPRESS_DB_PASSWORD=wordpress
-        - WORDPRESS_DB_HOST=sasom_db
-        - WORDPRESS_DB_NAME=wordpress
-        - WORDPRESS_DOMAIN=localhost
-        - WORDPRESS_ADMIN_USER=admin
-        - WORDPRESS_ADMIN_PASSWORD=test
-        - WORDPRESS_ADMIN_EMAIL=info@sasmo.de
+        WORDPRESS_DB_USER: ${WORDPRESS_DB_USER}
+        WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+        WORDPRESS_DB_HOST: db
+        WORDPRESS_DB_NAME: ${WORDPRESS_DB_NAME}
+        WORDPRESS_DOMAIN: ${WORDPRESS_DOMAIN}
+        WORDPRESS_ADMIN_USER: ${WORDPRESS_ADMIN_USER}
+        WORDPRESS_ADMIN_PASSWORD: ${WORDPRESS_ADMIN_PASSWORD}
+        WORDPRESS_ADMIN_EMAIL: ${WORDPRESS_ADMIN_EMAIL}
       volumes:
         - type: bind
           source: ./data/wp-volume
@@ -27,30 +27,30 @@ services:
         - 80:80
         - 443:443
       networks:
-        - sasom-network
+        - network
 
-    sasom_db:
-      container_name: sasom_db
+    db:
+      container_name: ${CONTAINER_PREFIX}-db
       image: mariadb:10.6.0
       command: --default-authentication-plugin=mysql_native_password
       restart: always
       environment:
-        MYSQL_USER: wp
-        MYSQL_PASSWORD: wordpress
-        MYSQL_ROOT_PASSWORD: mysqlrootpw
-        MYSQL_DATABASE: wordpress
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        MYSQL_DATABASE: ${MYSQL_DATABASE}
+        MYSQL_USER: ${MYSQL_USER}
+        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       ports: [ '6033:3306' ]
       expose: [ '3306' ]
       volumes:
         - type: bind
           source: ./data/db-volume
           target: /var/lib/mysql
-          consistency: cached
+          consistency: delegated
       networks:
-        - sasom-network
+        - network
 
-    sasom_redis:
-      container_name: sasom_redis
+    redis:
+      container_name: ${CONTAINER_PREFIX}-redis
       image: "redis:alpine"
       command: redis-server --requirepass redispass
       ports:
@@ -61,36 +61,36 @@ services:
           target: /usr/local/etc/redis/redis.conf
           consistency: cached
       environment:
-        - REDIS_REPLICATION_MODE=master
+        REDIS_REPLICATION_MODE: ${REDIS_REPLICATION_MODE}
       networks:
-        - sasom-network
+        - network
 
-    sasom_phpmyadmin:
-      container_name: sasom_phpmyadmin
+    phpmyadmin:
+      container_name: ${CONTAINER_PREFIX}-phpmyadmin
       image: phpmyadmin/phpmyadmin:4.7
       restart: always
       ports: [ '8081:80' ]
-      links: [ 'sasom_db:sasom_db' ]
+      links: [ 'db:db' ]
       environment:
-        - PMA_HOST=sasom_db
-        - PMA_USER=wp
-        - PMA_PASSWORD=wordpress
-        - PMA_ARBITRARY=1
+        PMA_HOST: db
+        PMA_USER: ${WORDPRESS_DB_USER}
+        PMA_PASSWORD: ${WORDPRESS_DB_PASSWORD}
+        PMA_ARBITRARY: ${PMA_ARBITRARY}
       networks:
-        - sasom-network
+        - network
 
-    sasom_mail:
-      container_name: sasom_mail
+    mail:
+      container_name: ${CONTAINER_PREFIX}-mail
       image: mailhog/mailhog
       ports:
         - "8025:8025"
         - "1025:1025"
       networks:
-        - sasom-network
+        - network
 
 volumes:
   data:
 
 networks:
-  sasom-network:
+  network:
     driver: bridge

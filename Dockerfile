@@ -10,9 +10,9 @@ RUN echo "+    building the image. otherwise the intermediate cache of     +"
 RUN echo "+    git clone will be used                                      +"
 RUN echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
-#RUN git clone https://user:passwd@github.com/knackw/DIVI.git /tmp/divi
-
 FROM alpine:edge
+
+RUN apk add --no-cache nginx-mod-http-perl
 
 RUN apk --update add ca-certificates && /usr/sbin/update-ca-certificates
 
@@ -172,9 +172,6 @@ ENV TZ=Europe/Berlin
 RUN apk update && \
     apk add --no-cache openssl && \
     rm -rf "/var/cache/apk/*"
-
-# for PHP FPM gives permission denied reason
-RUN chown -Rf www:www /var/lib/nginx
 
 # for PHP FPM gives permission denied reason
 RUN chown -Rf www:www /var/lib/nginx
