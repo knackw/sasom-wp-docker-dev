@@ -38,7 +38,8 @@ define( 'WP_REDIS_HOST', '192.168.32.3' );
 define( 'WP_REDIS_PORT', 6379 );
 define( 'WP_REDIS_PASSWORD', 'redispass' );
 define( 'WP_REDIS_TIMEOUT', 1 );
-define( 'WP_REDIS_READ_TIMEOUT', 1 );" \
+define( 'WP_REDIS_READ_TIMEOUT', 1 );
+define( 'WP_REDIS_DATABASE', 0 );" \
 ${ARGS}
 
     echo "Core Install"
