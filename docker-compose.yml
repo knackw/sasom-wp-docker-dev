@@ -14,6 +14,8 @@ services:
         WORDPRESS_ADMIN_USER: ${WORDPRESS_ADMIN_USER}
         WORDPRESS_ADMIN_PASSWORD: ${WORDPRESS_ADMIN_PASSWORD}
         WORDPRESS_ADMIN_EMAIL: ${WORDPRESS_ADMIN_EMAIL}
+        WORDPRESS_PORT: ${WORDPRESS_PORT}
+        WORDPRESS_PORT_SSL: ${WORDPRESS_PORT_SSL}
       volumes:
         - type: bind
           source: ./data/wp-volume
