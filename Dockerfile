@@ -137,6 +137,13 @@ RUN { \
 
 WORKDIR /www
 
+RUN echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+RUN echo "+                  Copy Config  Files!                           +"
+RUN echo "+                                                                +"
+RUN echo "+                                                                +"
+RUN echo "+                                                                +"
+RUN echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+
 # nginx configuration
 COPY ./etc/nginx.conf /etc/nginx/nginx.conf
 COPY ./etc/php-fpm.conf /etc/php7/php-fpm.conf
@@ -166,6 +173,13 @@ RUN apk update && \
 
 # for PHP FPM gives permission denied reason
 RUN chown -Rf www:www /var/lib/nginx
+
+RUN echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+RUN echo "+                  Start Docker Entrypoint!                      +"
+RUN echo "+                                                                +"
+RUN echo "+                                                                +"
+RUN echo "+                                                                +"
+RUN echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 
