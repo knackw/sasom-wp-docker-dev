@@ -36,3 +36,8 @@
 /etc/certs/example.com.crt
 /etc/certs/example.com.key
 /data/wp-volume/dump.rdb
+
+/etc/certs/sasom.localhost.crt
+/etc/certs/sasom.localhost.key
+/data/db-volume/
+/data/wp-volume/

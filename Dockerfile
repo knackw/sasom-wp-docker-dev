@@ -16,11 +16,12 @@ RUN apk add --no-cache nginx-mod-http-perl
 
 RUN apk --update add ca-certificates && /usr/sbin/update-ca-certificates
 
-RUN apk update && \
-	apk upgrade && \
-	apk add --update bash tzdata mysql-client && \
-	apk add supervisor curl nginx zip --no-cache && \
-	apk add php7 \
+RUN apk update
+RUN apk upgrade
+RUN apk add --update bash tzdata mysql-client
+RUN apk add supervisor curl nginx zip --no-cache
+RUN apk add icu-dev
+RUN apk add php7 \
 	    php7-dev \
 	    php7-cli \
 		libjpeg-turbo-dev \
@@ -105,11 +106,6 @@ RUN echo "zend_extension=/usr/lib/php7/modules/xdebug.so" >> /etc/php7/conf.d/xd
 
 RUN export XDEBUG_SESSION=1
 
-RUN printf "\n" | pecl install \
-		imagick
-
-RUN printf "\n" | pecl install pcov
-
 # setup redis
 RUN apk --update add redis
 RUN echo "vm.overcommit_memory = 1" >> /etc/sysctl.conf
@@ -138,11 +134,6 @@ RUN { \
 		echo 'ignore_repeated_source = Off'; \
 		echo 'html_errors = Off'; \
 	} > /etc/php7/conf.d/error-logging.ini
-
-RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-	&& php composer-setup.php \
-	&& php -r "unlink('composer-setup.php');" \
-	&& mv composer.phar /usr/bin/composer
 
 WORKDIR /www
 

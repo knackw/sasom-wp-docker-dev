@@ -58,13 +58,13 @@ ${ARGS}
     # Plugin Installation
     wp-cli ${ARGS} plugin install https://downloads.wordpress.org/plugin/nginx-helper.2.2.2.zip
     wp-cli ${ARGS} plugin activate nginx-helper
-    wp-cli ${ARGS} plugin install https://downloads.wordpress.org/plugin/redis-cache.2.0.22.zip
+    wp-cli ${ARGS} plugin install https://downloads.wordpress.org/plugin/redis-cache.2.0.23.zip
     wp-cli ${ARGS} plugin activate redis-cache
-    wp-cli ${ARGS} plugin install https://downloads.wordpress.org/plugin/query-monitor.3.7.1.zip
+    wp-cli ${ARGS} plugin install https://downloads.wordpress.org/plugin/query-monitor.3.8.2.zip
     wp-cli ${ARGS} plugin activate query-monitor
-    wp-cli ${ARGS} plugin install https://downloads.wordpress.org/plugin/flush-opcache.4.1.2.zip
+    wp-cli ${ARGS} plugin install https://downloads.wordpress.org/plugin/flush-opcache.4.1.3.zip
     wp-cli ${ARGS} plugin activate flush-opcache
-    wp-cli ${ARGS} plugin install https://downloads.wordpress.org/plugin/updraftplus.1.16.65.zip
+    wp-cli ${ARGS} plugin install https://downloads.wordpress.org/plugin/updraftplus.1.22.11.zip
     wp-cli ${ARGS} plugin activate updraftplus
 
     # Remove Plugin's
