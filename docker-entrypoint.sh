@@ -3,13 +3,6 @@
 ln -s /usr/bin/php7 /usr/bin/php
 php -v
 
-echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-echo "+                  Start Docker Entrypoint FILE!                 +"
-echo "+                                                                +"
-echo "+                                                                +"
-echo "+                                                                +"
-echo "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-
 openssl req -x509 -nodes -days 365 -subj "/C=CA/ST=QC/O=SASOM, Inc./CN=${WORDPRESS_DOMAIN}" -addext "subjectAltName=DNS:${WORDPRESS_DOMAIN}" -newkey rsa:2048 -keyout /certs/${WORDPRESS_DOMAIN}.key -out /certs/${WORDPRESS_DOMAIN}.crt;
 
 export WAIT_HOSTS=${WORDPRESS_DB_HOST}:3306
