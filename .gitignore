@@ -12,8 +12,8 @@
 /data/db-volume/multi-master.info
 /data/wp-volume/wp-admin/
 /data/wp-volume/wp-content/
-!/data/wp-volume/wp-includes/dummy.txt
 /data/wp-volume/wp-includes/
+!/data/wp-volume/wp-includes/dummy.txt
 /data/wp-volume/index.php
 /data/wp-volume/license.txt
 /data/wp-volume/liesmich.html
