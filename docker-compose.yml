@@ -20,7 +20,7 @@ services:
         - type: bind
           source: ./data/wp-volume
           target: /www
-          consistency: delegated
+          consistency: cached
         - type: bind
           source: ./etc/certs
           target: /certs
