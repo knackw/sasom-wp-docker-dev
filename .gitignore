@@ -42,3 +42,12 @@
 /data/wp-volume/wp-content/plugins/redis-cache/
 /data/wp-volume/wp-content/plugins/hello.php
 /data/wp-volume/wp-content/plugins/index.php
+/data/wp-volume/wp-content/plugins/updraftplus/
+/.idea/vcs.xml
+/data/wp-volume/supervisord.pid
+/data/wp-volume/supervisord.log
+/etc/certs/sasom.localhost.key
+/etc/certs/sasom.localhost.crt
+/.idea/sasom.dev.iml
+/.idea/modules.xml
+/.idea/.gitignore
