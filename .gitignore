@@ -51,3 +51,7 @@
 /.idea/sasom.dev.iml
 /.idea/modules.xml
 /.idea/.gitignore
+/data/wp-volume/wp-content/updraft/.htaccess
+/data/wp-volume/wp-content/updraft/index.html
+/.idea/php.xml
+/data/wp-volume/wp-content/updraft/web.config
