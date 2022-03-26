@@ -221,28 +221,58 @@ sudo gem install sass
 You can install SASS in Ubuntu with two simple commands:
 ```
 sudo apt update
-sudo apt install php-cli unzip
+sudo apt install php php-cli php-fpm php-json php-pdo php-mysql php-zip php-gd  php-mbstring php-curl php-xml php-pear php-bcmath
 ```
 Now, We are downloading and installing the Composer with the following commands:
 ```
 cd ~
 curl -sS https://getcomposer.org/installer -o composer-setup.php
 ```
-Run the following commands if you want to verify the installed composer:
-```
-php -r "if (hash_file('SHA384', 'composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-```
 You need to execute the following PHP code to verify that the Composer installer.
 ```
-HASH=`curl -sS https://composer.github.io/installer.sig
+HASH=`curl -sS https://composer.github.io/installer.sig`
 ```
-Now, Install composer on Ubuntu 20.04 LTS with the following command:
+If you want to verify the obtained value, you can run:
 ```
-sudo php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+echo $HASH
+```
+```
+Output
+e0012edf3e80b6978849f5eff0d4b4e4c79ff1609dd1e613307e16318854d24ae64f26d17af3ef0bf7cfb710ca74755a
+```
+Now execute the following PHP code, as provided in the Composer download page, to verify that the installation script is safe to run:
+```
+php -r "if (hash_file('SHA384', '/tmp/composer-setup.php') === '$HASH') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 ```
 Run the following command to test your installation:
 ```
 composer 
+```
+```
+Output
+   ______
+  / ____/___  ____ ___  ____  ____  ________  _____
+ / /   / __ \/ __ `__ \/ __ \/ __ \/ ___/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ (__  )  __/ /
+\____/\____/_/ /_/ /_/ .___/\____/____/\___/_/
+                    /_/
+Composer version Composer version 2.2.9 2022-03-15 22:13:37
+Usage:
+  command [options] [arguments]
+
+Options:
+  -h, --help                     Display this help message
+  -q, --quiet                    Do not output any message
+  -V, --version                  Display this application version
+      --ansi                     Force ANSI output
+      --no-ansi                  Disable ANSI output
+  -n, --no-interaction           Do not ask any interactive question
+      --profile                  Display timing and memory usage information
+      --no-plugins               Whether to disable plugins.
+  -d, --working-dir=WORKING-DIR  If specified, use the given directory as working directory.
+      --no-cache                 Prevent use of the cache
+  -v|vv|vvv, --verbose           Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+...
 ```
 #### 4.1.5 Install "git" on Ubuntu (https://git-scm.com/)
 First, use the apt package management tools to update your local package index.
@@ -263,6 +293,65 @@ You can install gettext in Ubuntu with two simple commands:
 ```
 sudo apt-get update -y
 sudo apt-get install -y gettext
+```
+#### 4.1.7 Install "node.js" on Ubuntu (https://nodejs.org/de/)
+
+Install Node.js and npm from the Ubuntu repository
+```
+sudo apt update
+sudo apt install nodejs npm
+```
+The command above will install a number of packages, including the tools necessary to compile and install native addons from npm.
+Once done, verify the installation by running:
+```
+sudo apt update
+sudo apt install nodejs npm
+
+nodejs --version
+```
+#### 4.1.6 Install "WP CLI" on Ubuntu (https://wp-cli.org/)
+
+Before installing WP-CLI, please make sure your environment meets the minimum requirements:
+
+UNIX-like environment (OS X, Linux, FreeBSD, Cygwin); limited support in Windows environment
+PHP 5.6 or later
+WordPress 3.7 or later. Versions older than the latest WordPress release may have degraded functionality
+
+Once you’ve verified requirements, download the wp-cli.phar file using wget or curl:
+```
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+```
+Next, check the Phar file to verify that it’s working:
+```
+php wp-cli.phar --info
+```
+To use WP-CLI from the command line by typing wp, make the file executable and move it to somewhere in your PATH. For example:
+```
+chmod +x wp-cli.phar
+sudo mv wp-cli.phar /usr/local/bin/wp
+```
+If WP-CLI was installed successfully, you should see something like this when you run wp --info:
+```
+$ wp --info
+OS:     Linux 5.10.60.1-microsoft-standard-WSL2 #1 SMP Wed Aug 25 23:20:18 UTC 2021 x86_64
+Shell:  /usr/bin/zsh
+PHP binary:     /usr/bin/php8.1
+PHP version:    8.1.0
+php.ini used:   /etc/php/8.1/cli/php.ini
+MySQL binary:   /usr/bin/mysql
+MySQL version:  mysql  Ver 8.0.27-0ubuntu0.20.04.1 for Linux on x86_64 ((Ubuntu))
+SQL modes:
+WP-CLI root dir:        /home/wp-cli/
+WP-CLI vendor dir:      /home/wp-cli/vendor
+WP_CLI phar path:
+WP-CLI packages dir:    /home/wp-cli/.wp-cli/packages/
+WP-CLI global config:
+WP-CLI project config:  /home/wp-cli/wp-cli.yml
+WP-CLI version: 2.6.0
+```
+Updating
+```
+wp cli update
 ```
 #### 4.2 Configure "DIVI" Development
 
@@ -334,6 +423,11 @@ docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Netw
 
 Useful Link: https://supporthost.in/install-redis-on-a-plesk-server/
 
-## 7. Conclusion
+## 7. Executing WP CLI in Container (https://wp-cli.org/de/)
+Example: Activate Theme
+```  
+docker exec sasom-wordpress  wp-cli theme activate eightshift-template
+```  
+## 8. Conclusion
 
 Happy coding :-)
